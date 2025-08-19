@@ -22,6 +22,47 @@ penguin_analysis <- penguins %>%
             sd_flipper_length = sd(flipper_length_mm),
             n = n())
 
+# paste data frame using datapasta
+animals <- data.frame(
+  stringsAsFactors = FALSE,
+          location = c("lagoon", "bluff", "creek", "oaks", "bluff"),
+           species = c("bobcat", "coyote", "fox", "squirrel", "bobcat"),
+          maturity = c("adult", "juvenile", "adult", "juvenile", "adult")
+)
 
+sites <- data.frame(
+  stringsAsFactors = FALSE,
+          location = c("beach", "lagoon", "bluff", "oaks"),
+    full_site_name = c("Goleta Beach","UCSB Lagoon",
+                       "Ellwood Mesa","Fremont Campground"),
+      jurisdiction = c("SB City", "UCSB", "SB City", "USFS")
+)
 
+# mutating joins
 
+# full_join()
+# keeps all rows and adds all columns
+full_join(animals, sites)
+
+# left_join()
+left_join(animals, sites)
+
+# right_join()
+right_join(animals, sites)
+
+# inner_join()
+inner_join(animals, sites)
+
+# filtering joins
+
+# semi_join()
+semi_join(animals, sites)
+# same as:
+animals %>%
+  filter(location %in% sites$location)
+
+# anti_join()
+anti_join(animals, sites)
+# same as:
+animals %>%
+  filter(!location %in% sites$location)
